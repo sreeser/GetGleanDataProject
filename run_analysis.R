@@ -14,7 +14,6 @@ library(plyr)
 #unzip("./data/data.zip")
 
 # go into test directory
-
 xtest<-read.table("data/UCI HAR Dataset/test/X_test.txt")
 ytest<-read.table("data/UCI HAR Dataset/test/y_test.txt")
 subjecttest<-read.table("data/UCI HAR Dataset/test/subject_test.txt")
@@ -36,7 +35,7 @@ remove(subjecttest,ytest,xtest)
  names(testdata)[1]="SubjectID"
  names(testdata)[2]="ActivityID"
 # 
-# # load train data
+# load train data
 xtrain<-read.table("data/UCI HAR Dataset/train/X_train.txt")
 ytrain<-read.table("data/UCI HAR Dataset/train/y_train.txt")
 subjecttrain<-read.table("data/UCI HAR Dataset/train/subject_train.txt")
@@ -48,7 +47,7 @@ traindata<-cbind(subjecttrain,ytrain,xtrain)
 #more cleanup
 remove(subjecttrain,ytrain,xtrain)
 
-# rename the first second columns accurate result
+#rename the first second columns accurate result
 names(traindata)[1]="SubjectID"
 names(traindata)[2]="ActivityID"
 
@@ -76,4 +75,4 @@ remove(xnames,data,data2,activity_labels,i)
 tidydata<-summarise_each(group_by(activitydata, SubjectID, Activity), funs(mean))
 
 #write out the new tidier data set
-write.table(tidydata,"tidydata.txt",row.names=TRUE)
+write.table(tidydata,"tidydata.txt",row.names=FALSE)
